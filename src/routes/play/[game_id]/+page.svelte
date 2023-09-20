@@ -3,8 +3,11 @@
 	import { io } from 'socket.io-client';
 
 	const socket = io();
+	let game_id = $page.params['game_id'];
 
-	socket.on('eventFromServer', (message) => {
+	socket.emit('joinRoom', game_id);
+
+	socket.on('logFromServer', (message) => {
 		console.log(message);
 	});
 
@@ -17,7 +20,7 @@
 	}
 </script>
 
-<h1>Game {$page.params['game_id']}</h1>
+<h1>Game {game_id}</h1>
 
 <button
 	on:click={() => {
